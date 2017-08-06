@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,13 +8,14 @@ import java.util.List;
 @Table(name = "book")
 public class Book {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id", nullable = false)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> studentList;
